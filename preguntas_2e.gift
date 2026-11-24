@@ -1,0 +1,41 @@
+::Puntos clave::¿Qué representa un landmark en la detección de una mano? {
+~%-20%El nivel medio de luz de todo el fotograma
+=La posición estimada de una referencia anatómica como la punta del índice
+~%-20%La identidad de la persona que usa la cámara
+~%-20%La duración de la captura de vídeo
+}
+
+::Estimación de pose::¿Qué conjunto de puntos permite estimar el ángulo de flexión del codo? {
+~%-20%Cadera, rodilla y tobillo
+~%-20%Nariz, mentón y frente
+=Hombro, codo y muñeca
+~%-20%Pulgar, índice y meñique
+}
+
+::Malla facial::¿Qué salida resulta adecuada para seguir la forma de los labios? {
+=Una malla facial con puntos alrededor de la boca
+~%-20%Una etiqueta con el nombre del ejercicio
+~%-20%El rectángulo que delimita el cuerpo completo
+~%-20%El número de fotogramas de la sesión
+}
+
+::Interacción sin contacto::Una persona mantiene el pulgar levantado durante un segundo. ¿Cómo se evita sumar varias repeticiones por ese gesto? {
+~%-20%Sumando una repetición por fotograma
+~%-20%Duplicando la velocidad de captura
+~%-20%Guardando los fotogramas en un archivo
+=Confirmando el gesto estable una vez y esperando su liberación o cambio para volver a activarlo
+}
+
+::Oclusión::En una prueba, una mancuerna tapa los dedos. ¿Qué causa del fallo conviene registrar? {
+~%-20%Exceso de repeticiones en la serie
+=Oclusión de puntos clave
+~%-20%Falta de espacio en el registro de acciones
+~%-20%Error de escala de la pantalla
+}
+
+::Privacidad local::¿Qué decisión reduce la exposición de imágenes personales en esta interfaz? {
+~%-20%Subir una copia de cada fotograma a un servidor
+~%-20%Publicar las detecciones junto al rostro de cada participante
+=Procesar los fotogramas en el dispositivo y conservar solo los resultados necesarios
+~%-20%Mantener la cámara grabando al cerrar la sesión
+}

@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101311">
+  <title>Gimnasio FitTrack 2.e · Control corporal</title>
+  <link rel="stylesheet" href="styles.css"><script src="app.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Ir al contenido</a>
+<aside class="rail">
+  <div class="brand"><svg viewBox="0 0 44 40" width="40" height="40" aria-hidden="true"><path fill="currentColor" d="M2 27 17 3h9L11 27zm9 10L32 3h9L20 37zm14 0 11-18h8L33 37z"/></svg><div><strong>FitTrack</strong><small>GIMNASIO / 2.e</small></div></div>
+  <nav aria-label="Navegación principal">
+    <a href="#panel" data-page="panel" aria-current="page"><i data-icon="dashboard"></i>Panel de sesión</a>
+    <a href="#pruebas" data-page="pruebas"><i data-icon="clipboard"></i>Pruebas de la demo</a>
+    <a href="#guia" data-page="guia"><i data-icon="book"></i>Guía de exposición</a>
+  </nav>
+  <div class="rail-bottom"><span class="course">2.º DAM · UD2 · RA2</span><div class="authors"><span class="avatar">AM</span><div>Ángel Armada<br>Manuel Rojo</div></div></div>
+</aside>
+<div class="shell">
+  <header class="topbar"><div class="crumb"><i data-icon="layers"></i> Gimnasio <span>/</span> <b>Control corporal 2.e</b></div><div class="clock"><i data-icon="timer"></i><span id="clock">00:00</span></div></header>
+  <main id="main" tabindex="-1">
+    <section id="panel" class="page">
+      <div class="page-head"><div><h1>Panel de entrenamiento</h1><p>Controla tu sesión con gestos, sin tocar la pantalla.</p></div><span class="badge" id="session-state"><b class="dot"></b> Sesión activa</span></div>
+      <div class="metrics">
+        <article class="card metric"><div class="metric-label"><span class="icon-tile lime"><i data-icon="activity"></i></span>Repeticiones</div><div class="metric-val"><strong id="reps">00</strong><span>/ 12</span><span aria-hidden="true" class="mini-bars" id="bars"></span></div></article>
+        <article class="card metric"><div class="metric-label"><span class="icon-tile blue"><i data-icon="layers"></i></span>Serie actual</div><div class="metric-val"><strong id="set">01</strong><span>/ 03</span><span id="exercise">Sentadillas</span></div></article>
+        <article class="card metric"><div class="metric-label"><span class="icon-tile violet"><i data-icon="scan"></i></span>Gesto detectado</div><div class="metric-val gesture-value"><strong id="gesture-name">En espera</strong><i class="signal" data-icon="wave"></i></div></article>
+      </div>
+      <div class="workspace">
+        <article class="card vision">
+          <div class="card-head"><div class="title-line"><i data-icon="scan"></i><h2>Visor de detección</h2></div><span class="mode-chip" id="mode-chip">Simulador</span></div>
+          <div class="viewer" id="viewer">
+            <video id="video" playsinline muted hidden></video><canvas id="frame" hidden></canvas>
+            <svg id="hand-diagram" viewBox="0 0 540 285" role="img" aria-label="Modelo simulado de los 21 puntos de una mano abierta">
+              <defs><linearGradient id="handfill" x1="0" y1="0" x2="1" y2="1" gradientUnits="objectBoundingBox"><stop stop-color="#9decb5" stop-opacity=".17"/><stop offset="1" stop-color="#9decb5" stop-opacity=".035"/></linearGradient></defs>
+              <g stroke="#70917f" fill="none" opacity=".7"><path d="M144 58v-13h14m218 0h14v13m0 180v14h-14m-218 0h-14v-14"/></g>
+              <g id="drawing"></g>
+            </svg>
+            <span class="viewer-label"><b class="dot"></b><span id="feed-label">VISTA SIMULADA</span></span>
+            <span class="landmarks" id="landmarks">21 LANDMARKS</span>
+          </div>
+          <div class="vision-foot"><span><i data-icon="cpu"></i><b id="source-label">Modelo de mano</b></span><button id="camera" class="button light"><i data-icon="camera"></i><span>Activar cámara</span></button></div>
+          <p id="camera-note" role="status" hidden></p>
+        </article>
+        <article class="card controls"><div class="card-head"><div class="title-line"><i data-icon="sliders"></i><h2>Control de gestos</h2></div></div>
+          <p id="gesture-help">Selecciona un gesto para simularlo.</p>
+          <div class="gesture-list">
+            <button class="gesture" data-gesture="open"><span class="gesture-icon lime"><i data-icon="hand"></i></span><span><strong>Mano abierta</strong><small>Siguiente ejercicio</small></span><i class="play" data-icon="play"></i></button>
+            <button class="gesture" data-gesture="fist"><span class="gesture-icon amber"><i data-icon="fist"></i></span><span><strong>Puño cerrado</strong><small>Pausar / reanudar serie</small></span><i class="play" data-icon="play"></i></button>
+            <button class="gesture" data-gesture="thumb"><span class="gesture-icon blue"><i data-icon="thumb"></i></span><span><strong>Pulgar arriba</strong><small>Contar repetición</small></span><i class="play" data-icon="play"></i></button>
+          </div>
+        </article>
+      </div>
+      <article class="card log"><div class="card-head"><div class="title-line"><i data-icon="history"></i><h2>Registro de acciones</h2></div><span class="count-chip" id="log-count">0 eventos</span></div><ol id="log" aria-live="polite"></ol></article>
+    </section>
+    <section id="pruebas" class="page" hidden>
+      <div class="page-head"><div><h1>Pruebas de la demo</h1><p>Registra los 10 intentos de la exposición y anota qué ocurrió.</p></div><button id="export" class="button light" disabled><i data-icon="download"></i>Exportar JSON</button></div>
+      <div class="metrics trial-stats"><article class="card metric"><div class="metric-label">Intentos registrados</div><div class="metric-val"><strong id="trial-count">0</strong><span>/ 10</span></div></article><article class="card metric"><div class="metric-label">Aciertos</div><div class="metric-val"><strong id="wins">0</strong></div></article><article class="card metric"><div class="metric-label">Tasa de éxito</div><div class="metric-val"><strong id="rate">—</strong></div></article></div>
+      <article class="card content"><h2>Hoja de intentos</h2><p>Marca si el gesto ejecutó la acción esperada. El porcentaje se calcula sobre los intentos registrados. Pulsa de nuevo un resultado para desmarcarlo.</p><div id="trials"></div><p id="trial-note" role="status"></p></article>
+    </section>
+    <section id="guia" class="page" hidden>
+      <div class="page-head"><div><h1>Guía de exposición</h1><p>Ángel Armada y Manuel Rojo · 2.º DAM · Desarrollo de Interfaces · UD2 · RA2 · Criterio 2.e</p></div></div>
+      <article class="card content"><h2>Del cuerpo a la interfaz</h2><p>Con las manos sudadas u ocupadas, una interfaz sin contacto (touchless UI) permite controlar la sesión a distancia. En FitTrack, el pulgar levantado suma una repetición.</p>
+        <ol class="flow"><li><strong>Capturar.</strong> La cámara entrega un fotograma al navegador con permiso de la persona.</li><li><strong>Localizar.</strong> MediaPipe Hands estima 21 puntos clave o <em>landmarks</em> por mano, desde la muñeca hasta las puntas de los dedos.</li><li><strong>Interpretar.</strong> La posición relativa de los puntos permite distinguir dedos extendidos y plegados. Mantén la mano frente a la cámara y el pulgar hacia arriba para contar.</li><li><strong>Actuar.</strong> Un gesto estable activa una acción y aparece en el registro. Relaja o retira la mano antes de repetir el mismo gesto.</li></ol></article>
+      <article class="card content"><h2>Mano, pose y rostro</h2><p><strong>Mano.</strong> Las conexiones entre landmarks dibujan un esqueleto articulado. Una malla añade caras entre vértices para representar la superficie.</p><p><strong>Pose estimation.</strong> Con hombro, cadera y rodilla se puede estimar el ángulo de la cadera durante una sentadilla.</p><p><strong>Face mesh.</strong> Una malla facial sigue rasgos como labios y párpados. Permite, por ejemplo, mover un cursor con la orientación de la cabeza.</p></article>
+      <article class="card content"><h2>Comparativa de herramientas</h2><div class="table-wrap"><table><thead><tr><th>Herramienta</th><th>Entorno</th><th>Aplicación</th></tr></thead><tbody><tr><td>MediaPipe Hands</td><td>Navegador</td><td>Gestos de los dedos para controlar FitTrack.</td></tr><tr><td>MediaPipe Face Mesh</td><td>Navegador</td><td>Seguir la geometría del rostro con una malla.</td></tr><tr><td>ML Kit Pose Detection</td><td>Android / iOS</td><td>Seguir 33 puntos corporales en una app nativa.</td></tr></tbody></table></div><p class="references">Documentación · <a href="https://chuoling.github.io/mediapipe/solutions/hands.html">Hands</a> · <a href="https://chuoling.github.io/mediapipe/solutions/face_mesh.html">Face Mesh</a> · <a href="https://developers.google.com/ml-kit/vision/pose-detection">ML Kit</a></p></article>
+      <article class="card content"><h2>Ventajas, límites y privacidad</h2><p>El control a distancia evita tocar una pantalla compartida. La poca luz, la oclusión y el movimiento rápido pueden provocar fallos. Compara los resultados en la hoja de intentos y prueba con luz frontal.</p><p>La cámara procesa los fotogramas en el dispositivo. El CDN suministra el detector y sus recursos. FitTrack no graba ni envía vídeo. Al volver al simulador se apaga la cámara. Solo la hoja de intentos se guarda en este navegador.</p></article>
+    </section>
+  </main>
+</div>
+</body>
+</html>
